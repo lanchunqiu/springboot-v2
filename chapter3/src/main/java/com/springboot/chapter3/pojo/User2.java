@@ -1,4 +1,4 @@
-package com.springboot.chapter3.config;
+package com.springboot.chapter3.pojo;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -7,7 +7,7 @@
         <groupId>com.springboot</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.springboot</groupId>
+    <groupId>com.springboot.chapter2</groupId>
     <artifactId>chapter2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
