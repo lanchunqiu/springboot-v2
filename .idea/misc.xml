@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/chapter1" />
     <file type="web" url="file://$PROJECT_DIR$/chapter2" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter3" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />

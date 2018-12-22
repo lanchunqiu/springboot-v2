@@ -3,8 +3,10 @@ package com.springboot.chapter3;
 
 import com.springboot.chapter3.config.AppConfig;
 import com.springboot.chapter3.config.AppConfig2;
+import com.springboot.chapter3.pojo.BusinessPerson;
 import com.springboot.chapter3.pojo.User2;
 import com.springboot.chapter3.pojo.User;
+import com.springboot.chapter3.pojo.definition.Person;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -25,5 +27,11 @@ public class IoCTest {
         ctx = new AnnotationConfigApplicationContext(AppConfig2.class);
         User2 user2 = ctx.getBean(User2.class);
         log.info(user2.getId());
+
+        Person person = ctx.getBean(BusinessPerson.class);
+        person.service();
+
+        //关闭IoC容器
+        ((AnnotationConfigApplicationContext) ctx).close();
     }
 }
