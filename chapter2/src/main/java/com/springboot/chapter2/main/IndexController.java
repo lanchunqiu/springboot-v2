@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Description
  * @Date 2018/12/19
  **/
-@Controller
+@Controller("/")
 public class IndexController {
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String index(){
         return "index";
     }
