@@ -2,12 +2,14 @@ package com.springboot.chapter4.aspect.service.impl;
 
 import com.springboot.chapter4.aspect.service.UserService;
 import com.springboot.chapter4.pojo.User;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author lancq
  * @Description 连接点（此类中方法）
  * @Date 2018/12/25
  **/
+@Service
 public class UserServiceImpl implements UserService {
     private User user = null;
 

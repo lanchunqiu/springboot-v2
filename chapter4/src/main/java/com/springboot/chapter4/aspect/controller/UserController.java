@@ -1,6 +1,7 @@
 package com.springboot.chapter4.aspect.controller;
 
 import com.springboot.chapter4.aspect.service.UserService;
+import com.springboot.chapter4.aspect.validator.UserValidator;
 import com.springboot.chapter4.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,5 +34,29 @@ public class UserController {
         user.setNote(note);
         userService.printUser(user);
         return user;
+    }
+
+    //定义请求
+    @RequestMapping("/vp")
+    //放回JSON
+    @ResponseBody
+    public User validateAndPrint(Long id, String userName, String note){
+        User user = new User();
+        user.setId(id);
+        user.setUsername(userName);
+        user.setNote(note);
+        //强制转换
+        UserValidator userValidator = (UserValidator)userService;
+
+        if(userValidator.validate(user)){
+            userService.printUser(user);
+        }
+        return user;
+    }
+
+    @RequestMapping("/manyAspects")
+    public String manyAspects() {
+        userService.manyAspects();
+        return "manyAspects";
     }
 }
