@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
+    <groupId>com.springboot.chapter5</groupId>
     <artifactId>chapter5</artifactId>
 
 
@@ -66,6 +67,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.3.0.Final</version>
         </dependency>
     </dependencies>
 
