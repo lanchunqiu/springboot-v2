@@ -2,6 +2,7 @@ package com.springboot.chapter5.pojo;
 
 import com.springboot.chapter5.converter.SexConverter;
 import com.springboot.chapter5.enumeration.SexEnum;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
 
@@ -14,6 +15,8 @@ import javax.persistence.*;
 @Entity(name = "user")
 //定义映射的表
 @Table(name = "t_user")
+//MyBatis指定别名
+@Alias(value = "user")
 public class User {
     //标明主键
     @Id
