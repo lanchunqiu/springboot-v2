@@ -9,8 +9,10 @@
     <file url="file://$PROJECT_DIR$/chapter4" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter4/src/main/resources/log4j.properties" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter5" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/chapter5/src/main/java/com/springboot/chapter5/mapper/User_Mapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter5/chapter6" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter5/src/main/resources/log4j.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter6" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter6/src/main/resources/application.properties" charset="GBK" />
     <file url="file://$PROJECT_DIR$/mylog.log" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
