@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>用户详情</title>
+    </head>
+    <body>
+    
+        <center>
+            <table border="1">
+                <tr>
+                    <td>标签</td>
+                    <td>值</td>
+                </tr>
+                <tr>
+                    <td>用户编号</td>
+                    <td th:text="${user.id}"></td>
+                </tr>
+                <tr>
+                    <td>用户名称</td>
+                    <td th:text="${user.userName}"></td>
+                </tr>
+                <tr>
+                    <td>用户备注</td>
+                    <td th:text="${user.note}"></td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>

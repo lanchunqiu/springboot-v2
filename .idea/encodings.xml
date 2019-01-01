@@ -9,11 +9,23 @@
     <file url="file://$PROJECT_DIR$/chapter4" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter4/src/main/resources/log4j.properties" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter5" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/chapter5/chapter6" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter5/src/main/resources/log4j.properties" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter6" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter6/src/main/resources/application.properties" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter7" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter8" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter8/src/main/java/com/springboot/chapter8/main/ServletInitializer.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter8/src/main/resources/static" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter8/src/main/resources/templates" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter8/src/main/resources/templates/error.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter9" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/java/com/springboot/chapter9/dao/UserDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/java/com/springboot/chapter9/mapper" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/java/com/springboot/chapter9/pojo/User.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/java/com/springboot/chapter9/service/UserService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/java/com/springboot/chapter9/service/impl/UserServiceImpl.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/resources/static" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter9/src/main/resources/templates" charset="GBK" />
     <file url="file://$PROJECT_DIR$/mylog.log" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
