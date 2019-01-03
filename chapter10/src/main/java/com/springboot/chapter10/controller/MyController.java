@@ -1,12 +1,18 @@
 package com.springboot.chapter10.controller;
 
+import com.springboot.chapter10.pojo.ValidatorPojo;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -82,5 +88,44 @@ public class MyController {
         dataMap.put("date", date);
         dataMap.put("number", number);
         return dataMap;
+    }
+
+    @GetMapping("/valid/page")
+    public String validPage() {
+        return "/validator/pojo";
+    }
+
+    /**
+     * 解析验证参数错误
+     * @param vp 需要验证的pojo,使用注解@Valid表示验证
+     * @param errors 错误信息，它有SpringMVC通过验证POJO后自动填充
+     * @return
+     */
+    @RequestMapping("/valid/validate")
+    @ResponseBody
+    public Map<String,Object> validate(
+            @Valid @RequestBody ValidatorPojo vp, Errors errors
+            ){
+        Map<String,Object> errMap = new HashMap<>();
+        //获取错误列表
+        List<ObjectError> oes = errors.getAllErrors();
+        for(ObjectError oe: oes){
+            String key = null;
+            String msg = null;
+            //字段错误
+            if(oe instanceof FieldError){
+                FieldError fe = (FieldError) oe;
+                //获取错误验证字段名
+                key = fe.getField();
+            } else {
+                //非字段错误
+                //获取验证对象名称
+                key = oe.getObjectName();
+            }
+            //错误信息
+            msg = oe.getDefaultMessage();
+            errMap.put(key,msg);
+        }
+        return errMap;
     }
 }

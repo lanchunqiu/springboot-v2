@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author lancq
  * @Description
@@ -46,5 +48,17 @@ public class UserController {
     // @PathVariable通过名称获取参数
     public User get(@PathVariable("id") Long id) {
         return userService.getUser(id);
+    }
+
+    @GetMapping("/converter")
+    @ResponseBody
+    public User getUserByConverter(User user){
+        return user;
+    }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public List<User> list(List<User> userList){
+        return userList;
     }
 }
