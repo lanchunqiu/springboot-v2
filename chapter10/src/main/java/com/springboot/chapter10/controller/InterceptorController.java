@@ -1,0 +1,21 @@
+package com.springboot.chapter10.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * @Author lancq
+ * @Description
+ * @Date 2019/1/4
+ **/
+@RequestMapping("/interceptor")
+@Controller
+public class InterceptorController {
+
+    @GetMapping("/start")
+    public String start(){
+        System.out.println("执行处理器逻辑");
+        return "/welcome";
+    }
+}
