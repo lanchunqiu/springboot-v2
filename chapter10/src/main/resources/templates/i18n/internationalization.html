@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring MVC国际化</title>
+</head>
+<body>
+<!-- 通过HTTP请求参数变化国际化 -->
+<a href="./page?language=zh_CN">简体中文</a>
+<a href="./page?language=en_US">美国英文</a>
+<h2>
+    <!-- 找到属性文件变量名为welcome的配置 -->
+    <h2 th:text="#{msg}" />
+</h2>
+<!-- 当前国际化区域 -->
+Locale: <label th:text="#{locale}"></label>
+</body>
+</html>
