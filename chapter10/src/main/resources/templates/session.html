@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Session</title>
+    <!-- 加载Query文件-->
+    <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <script src="https://ciphertrick.com/demo/jquerysession/js/jquerysession.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $.session.set('id', 1);
+            window.location.href = "./test";
+        });
+
+    </script>
+</head>
+<body>
+session测试
+</body>
+</html>

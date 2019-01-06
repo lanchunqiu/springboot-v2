@@ -12,6 +12,7 @@ import com.springboot.chapter10.view.PdfView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.awt.*;
@@ -180,5 +182,106 @@ public class UserController {
                 e.printStackTrace();;
             }
         };
+    }
+
+//    /**
+//     * 显示用户
+//     * @param id
+//     * @param model
+//     * @return
+//     */
+//    @GetMapping("/show")
+//    public String showUser(Long id, Model model){
+//        User user = userService.getUser(id);
+//        model.addAttribute("user", user);
+//        return "data/user";
+//    }
+//
+//    /**
+//     * 使用字符串指定跳转
+//     * @param userName
+//     * @param note
+//     * @return
+//     */
+//    @GetMapping("/redirect1")
+//    public String redirect1(String userName, String note){
+//        User user = new User();
+//        user.setNote(note);
+//        user.setUserName(userName);
+//        //插入数据后，回填user的id
+//        userService.insertUser(user);
+//        return "redirect:/user/show?id=" + user.getId();
+//    }
+//
+//    @GetMapping("/redirect2")
+//    public ModelAndView redirect2(String userName, String note){
+//        User user = new User();
+//        user.setNote(note);
+//        user.setUserName(userName);
+//        userService.insertUser(user);
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("redirect:/user/show?id=" + user.getId());
+//        return mv;
+//    }
+
+    /**
+     * 显示用户
+     * @param user
+     * @param model
+     * @return
+     */
+    @GetMapping("/showUser")
+    public String showUser(User user, Model model){
+        System.out.println("user = [" + user + "], model = [" + model + "]");
+        return "data/user";
+    }
+
+    /**
+     * 使用字符串指定跳转
+     * @param userName
+     * @param note
+     * @return
+     */
+    @GetMapping("/redirect1")
+    public String redirect1(String userName, String note, RedirectAttributes ra){
+        User user = new User();
+        user.setNote(note);
+        user.setUserName(userName);
+        //插入数据后，回填user的id
+        userService.insertUser(user);
+        //保存需要传递给重定向的对象
+        ra.addFlashAttribute("user", user);
+        return "redirect:/user/showUser";
+    }
+
+    @GetMapping("/redirect2")
+    public ModelAndView redirect2(String userName, String note, RedirectAttributes ra){
+        User user = new User();
+        user.setNote(note);
+        user.setUserName(userName);
+        userService.insertUser(user);
+        //保存需要传递给重定向的对象
+        ra.addFlashAttribute("user", user);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/user/showUser");
+        return mv;
+    }
+
+    /**
+     * 跳转到header页面
+     * @return
+     */
+    @GetMapping("/header/page")
+    public String headerPage() {
+        return "header";
+    }
+
+    @PostMapping("/header/user")
+    @ResponseBody
+    public User headerUser(
+            @RequestHeader("id") Long id// 通过@RequestHeader接收请求头参数
+    ) {
+        User user = userService.getUser(id);
+        return user;
     }
 }

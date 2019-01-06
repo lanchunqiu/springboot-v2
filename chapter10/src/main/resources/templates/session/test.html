@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <!-- 加载Query文件-->
+    <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <script src="https://ciphertrick.com/demo/jquerysession/js/jquerysession.js"></script>
+    <script type="text/javascript">
+        $(function(){});
+        var user = $.session.getAttribute("user");
+        var id = $.session.getAttribute("id_new");
+        $("#username").innerText = user.userName;
+        $("#id_new").innerText = id;
+    </script>
+</head>
+<body>
+<h3><td id = "username"></td></h3>
+<h3><td id = "id_new"></td></h3>
+</body>
+</html>
