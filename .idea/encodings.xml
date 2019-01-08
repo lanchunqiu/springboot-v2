@@ -13,6 +13,9 @@
     <file url="file://$PROJECT_DIR$/chapter11" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter11/src/main/resources/static" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter11/src/main/resources/templates" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter12" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter12/src/main/resources/static" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/chapter12/src/main/resources/templates" charset="GBK" />
     <file url="file://$PROJECT_DIR$/chapter2" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter3" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter3/src/main/java/log4j.properties" charset="UTF-8" />
