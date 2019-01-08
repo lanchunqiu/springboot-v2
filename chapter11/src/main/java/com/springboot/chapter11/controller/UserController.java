@@ -1,10 +1,13 @@
 package com.springboot.chapter11.controller;
 
 import com.springboot.chapter11.enumeration.SexEnum;
+import com.springboot.chapter11.exception.NotFoundException;
 import com.springboot.chapter11.pojo.User;
 import com.springboot.chapter11.service.UserService;
 import com.springboot.chapter11.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -133,6 +136,28 @@ public class UserController {
     @GetMapping("/user/name")
     public String changeUserName(){
         return "change_user_name";
+    }
+
+    /**
+     * 测试控制器异常处理方式
+     * @param id
+     * @return
+     */
+    @GetMapping(
+            value="/user/exp/{id}",
+            // 产生JSON数据集
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    // 响应成功
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public UserVo getUserForExp(@PathVariable("id") Long id) {
+        User user = userService.getUser(id);
+        // 如果找不到用户，则抛出异常，进入控制器通知
+        if (user == null) {
+            throw new NotFoundException(1L, "找不到用户【" + id +"】信息");
+        }
+        UserVo userVo = changeToVo(user);
+        return userVo;
     }
 
     // 转换Vo变为PO

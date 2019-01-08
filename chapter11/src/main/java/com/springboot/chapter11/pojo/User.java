@@ -38,4 +38,14 @@ public class User {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", sex=" + sex +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

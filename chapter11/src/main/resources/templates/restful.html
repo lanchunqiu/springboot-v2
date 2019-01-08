@@ -97,6 +97,36 @@
                  }
              });
          }
+
+         function postStatus() {
+             // 请求体
+             var params = {
+                 'userName': 'user_name_new',
+                 'sexCode' : 1,
+                 'note' : "note_new"
+             }
+             var url = "./user2/annotation";
+             $.post({
+                 url : url,
+                 // 此处需要告知传递参数类型为JSON，不能缺少
+                 contentType : "application/json",
+                 // 将JSON转化为字符串传递
+                 data : JSON.stringify(params),
+                 // 成功后的方法
+                 success : function(result, status, jqXHR) {
+                     // 获取响应头
+                     var success = jqXHR.getResponseHeader("success");
+                     // 获取状态码
+                     var status = jqXHR.status;
+                     alert("响应头参数是：" + success+"，状态码是：" + status);
+                     if (result == null || result.id == null) {
+                         alert("插入失败");
+                         return;
+                     }
+                     alert("插入成功");
+                 }
+             });
+         }
     </script>
 </head>
 <body>
@@ -109,5 +139,6 @@
     <input type="button" value="更新" onclick="updateUser()"/>
     <input type="button" value="修改用户名称" onclick="updateUserName()"/>
     <input type="button" value="删除用户" onclick="deleteUser()"/>
+    <input type="button" value="添加用户后反馈状态码" onclick="postStatus()"/>
 </body>
 </html>
