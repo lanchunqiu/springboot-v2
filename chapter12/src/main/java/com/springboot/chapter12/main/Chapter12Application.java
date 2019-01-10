@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 /**
@@ -196,36 +199,36 @@ public class Chapter12Application extends WebSecurityConfigurerAdapter {
 //
 //    }
 
-    /**
-     * 使用Spring表达式限定
-     * @param http
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        //http.csrf().disable().authorizeRequests()//关闭csrf验证
-        http.authorizeRequests()
-
-		// 使用Spring表达式限定只有角色ROLE_USER或者ROLE_ADMIN
-		.antMatchers("/user/**","/csrf/**").access("hasRole('USER') or hasRole('ADMIN')")
-
-        // 设置访问权限给角色ROLE_ADMIN，要求是完整登录(非记住我登录)
-		.antMatchers("/admin/welcome1").access("hasAuthority('ROLE_ADMIN') && isFullyAuthenticated()")
-
-	    // 限定"/admin/welcome2"访问权限给角色ROLE_ADMIN，允许不完整登录
-		.antMatchers("/admin/welcome2").access("hasAuthority('ROLE_ADMIN')")
-
-		// 使用记住我的功能
-		.and().rememberMe()
-
-		// 使用Spring Security默认的登录页面
-		.and().formLogin()
-
-		// 启动HTTP基础验证
-		.and().httpBasic();
-
-    }
+//    /**
+//     * 使用Spring表达式限定
+//     * @param http
+//     * @throws Exception
+//     */
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        //http.csrf().disable().authorizeRequests()//关闭csrf验证
+//        http.authorizeRequests()
+//
+//		// 使用Spring表达式限定只有角色ROLE_USER或者ROLE_ADMIN
+//		.antMatchers("/user/**","/csrf/**").access("hasRole('USER') or hasRole('ADMIN')")
+//
+//        // 设置访问权限给角色ROLE_ADMIN，要求是完整登录(非记住我登录)
+//		.antMatchers("/admin/welcome1").access("hasAuthority('ROLE_ADMIN') && isFullyAuthenticated()")
+//
+//	    // 限定"/admin/welcome2"访问权限给角色ROLE_ADMIN，允许不完整登录
+//		.antMatchers("/admin/welcome2").access("hasAuthority('ROLE_ADMIN')")
+//
+//		// 使用记住我的功能
+//		.and().rememberMe()
+//
+//		// 使用Spring Security默认的登录页面
+//		.and().formLogin()
+//
+//		// 启动HTTP基础验证
+//		.and().httpBasic();
+//
+//    }
 
 //    /**
 //     * 强制使用HTTPS请求
@@ -245,4 +248,60 @@ public class Chapter12Application extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/user/**").hasAnyRole("ROLE", "ADMIN");
 //
 //    }
+
+//    /**
+//     * 记住我
+//     * @param http
+//     * @throws Exception
+//     */
+//    @Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//	    http .httpBasic().realmName("my-basic-name").and()
+//	    // 访问/admin下的请求需要管理员权限
+//	     .authorizeRequests().antMatchers("/admin/**").access("hasRole('ADMIN')")
+//	    // 启用remember me功能
+//	    .and().rememberMe().tokenValiditySeconds(86400).key("remember-me-key")
+//	    // 启用HTTP Batic功能
+//	    .and().httpBasic()
+//	    // 通过签名后可以访问任何请求
+//	    .and().authorizeRequests().antMatchers("/**").permitAll()
+//	    // 设置登录页和默认的跳转路径
+//	    .and().formLogin().loginPage("/login/page").defaultSuccessUrl("/admin/welcome1");
+//	}
+
+    /**
+     * 记住我
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+
+        http    //访问/admin下的请求需要管理员权限
+                .authorizeRequests().antMatchers("/admin/**").access("hasRole('ADMIN')")
+                // 通过签名后可以访问任何请求
+                .and().authorizeRequests().antMatchers("/**").permitAll()
+                // 设置登录页和默认的跳转路径
+                .and().formLogin().loginPage("/login/page")
+                .defaultSuccessUrl("/admin/welcome1")
+
+                // 登出页面和默认跳转路径
+                .and().logout().logoutUrl("/logout/page")
+                .logoutSuccessUrl("/welcome");
+
+    }
+
+
+    @Autowired
+    private RedisTemplate redisTemplate = null;
+
+    @PostConstruct
+    public void initRedisTemplate() {
+        RedisSerializer<String> strSerializer = redisTemplate.getStringSerializer();
+        redisTemplate.setKeySerializer(strSerializer);
+        redisTemplate.setHashKeySerializer(strSerializer);
+    }
+
+
 }
