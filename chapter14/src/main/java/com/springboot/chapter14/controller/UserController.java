@@ -2,11 +2,15 @@ package com.springboot.chapter14.controller;
 
 import com.springboot.chapter14.pojo.User;
 import com.springboot.chapter14.service.UserService;
+import com.springboot.chapter14.validator.UserValidator;
 import com.springboot.chapter14.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
 
 /**
  * @Author lancq
@@ -64,6 +68,39 @@ public class UserController {
         return userService.findUsers(userName, note)
                 // 从User对象转换为UserVo对象
                 .map(u -> translate(u));
+    }
+
+    //使用转换器
+    @PostMapping("/user2/{user}")
+    public Mono<UserVo> insertUser2(@PathVariable("user") User user) {
+        return userService.insertUser(user)
+                // 进行PO和VO之间的转换
+                .map(u -> translate(u));
+    }
+
+    // 加入局部验证器
+    @InitBinder
+    public void initBinder(DataBinder binder) {
+        binder.setValidator(new UserValidator());
+    }
+
+    @PostMapping("/user3")
+    public Mono<UserVo> insertUser3(@Valid @RequestBody User user) {
+        return userService.insertUser(user)
+                // 进行PO和VO之间的转换
+                .map(u -> translate(u));
+    }
+
+    @PutMapping("/user/name")
+    public Mono<UserVo> updateUserName(@RequestHeader("id") Long id,
+                                       @RequestHeader("userName") String userName) {
+        Mono<User> userMono = userService.getUser(id);
+        User user = userMono.block();
+        if (user == null) { // 查找不到用户信息，抛出运行异常消息......
+            throw new RuntimeException("找不到用户信息");
+        }
+        user.setUserName(userName);
+        return this.updateUser(user);
     }
 
     /***
