@@ -12,6 +12,12 @@
         <module name="chapter12" />
         <module name="chapter14" />
         <module name="chapter15" />
+        <module name="chapter16" />
+        <module name="chapter17-dashboard" />
+        <module name="chapter17-product" />
+        <module name="chapter17-server" />
+        <module name="chapter17-user" />
+        <module name="chapter17-zuul" />
         <module name="chapter2" />
         <module name="chapter3" />
         <module name="chapter4" />

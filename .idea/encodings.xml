@@ -22,6 +22,13 @@
     <file url="file://$PROJECT_DIR$/chapter15" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter15/src/main/resources/static" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter15/src/main/resources/templates" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter16" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17/chapter17-dashboard" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17/chapter17-product" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17/chapter17-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17/chapter17-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chapter17/chapter17-zuul" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter2" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter3" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chapter3/src/main/java/log4j.properties" charset="UTF-8" />
