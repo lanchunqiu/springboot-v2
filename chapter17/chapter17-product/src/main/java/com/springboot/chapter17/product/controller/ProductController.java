@@ -1,5 +1,7 @@
 package com.springboot.chapter17.product.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.springboot.chapter17.product.service.UserService;
 import com.springboot.chapter17.user.pojo.UserPo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +78,34 @@ public class ProductController {
             result = userService.updateName(userName, id);
         }
         return result;
+    }
+
+
+    /**
+     * Ribbon断路
+     * @return
+     */
+    @GetMapping("/circuitBreaker1")
+    //注解@HystrixCommand表示方法上将启用断路机制
+    @HystrixCommand(fallbackMethod = "error", //fallbackMethod指定降级的方法
+            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000") })
+    public String circuitBreaker1() {
+        return restTemplate.getForObject("http://USER/timeout", String.class);
+    }
+
+
+    /**
+     * Feign断路测试
+     * @return
+     */
+    @GetMapping("/circuitBreaker2")
+    @HystrixCommand(fallbackMethod = "error")
+    public String circuitBreaker2() {
+        return userService.testTimeout();
+    }
+
+    // 降级服务方法
+    public String error() {
+        return "超时出错。";
     }
 }

@@ -35,7 +35,12 @@ public interface UserService {
             // 请求头参数
             @RequestHeader("id") Long id);
 
-    // 调用用户微服务的timeout请求
+
+    /**
+     * 测试短路器
+     * 调用用户微服务的timeout请求
+     * @return
+     */
     @GetMapping("/timeout")
     public String testTimeout();
 }
